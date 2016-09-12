@@ -3,8 +3,150 @@
     <head>
         <meta charset="utf-8">
         <title>music ranking parser</title>
+        <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+	    <!--Import Google Icon Font-->
+	    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <!--Import materialize.css-->
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
+        <div class="content">
 
+        <div class="row">
+            <table class="col s3 centered striped">
+
+                <thead style="background-color: rgb(10, 202, 36);">
+                    <tr>
+                        <th style="color: white;">Melon</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody id="melon">
+                </tbody>
+
+            </table>
+
+            <table class="col s3 centered striped">
+                <thead style="background-color: rgb(255, 30, 21);">
+                    <tr>
+                        <th style="color: white;">Bugs!</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody id="bugs">
+                </tbody>
+
+            </table>
+
+            <table class="col s3 centered striped">
+                <thead style="background-color: rgb(21, 177, 199);">
+                    <tr>
+                        <th style="color: white;">genie</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody id="genie">
+                </tbody>
+
+            </table>
+
+            <table class="col s3 centered striped">
+                <thead style="background-color: rgb(219, 0, 99);">
+                    <tr>
+                        <th style="color: white;">Mnet</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody id="mnet">
+                </tbody>
+
+            </table>
+        </div>
+
+        <script>
+            $(document).ready(() => {
+
+                $.ajax({
+                    url: '/melon',
+                    dataType: 'json',
+                    type: 'POST',
+                    success: (result) => {
+                        var i;
+
+                        for(i = 1; i <= 10; i++) {
+                            $('#melon').append(`<tr>
+                                                    <td>${i}위</td>
+                                                    <td>` + result['melon'][`song${i}`] + `</td>
+                                                    <td>` + result['melon'][`artist${i}`] + `</td>
+                                                </tr>`);
+                        }
+                    }
+                });
+
+                $.ajax({
+                    url: '/bugs',
+                    dataType: 'json',
+                    type: 'POST',
+                    success: (result) => {
+                        var i;
+
+                        for(i = 1; i <= 10; i++) {
+                            $('#bugs').append(`<tr>
+                                                    <td>${i}위</td>
+                                                    <td>` + result['bugs'][`song${i}`] + `</td>
+                                                    <td>` + result['bugs'][`artist${i}`] + `</td>
+                                                </tr>`);
+                        }
+                    }
+                });
+
+                $.ajax({
+                    url: '/genie',
+                    dataType: 'json',
+                    type: 'POST',
+                    success: (result) => {
+                        var i;
+
+                        for(i = 1; i <= 10; i++) {
+                            $('#genie').append(`<tr>
+                                                    <td>${i}위</td>
+                                                    <td>` + result['genie'][`song${i}`] + `</td>
+                                                    <td>` + result['genie'][`artist${i}`] + `</td>
+                                                </tr>`);
+                        }
+                    }
+                });
+
+                $.ajax({
+                    url: '/mnet',
+                    dataType: 'json',
+                    type: 'POST',
+                    success: (result) => {
+                        var i;
+
+                        for(i = 1; i <= 10; i++) {
+                            $('#mnet').append(`<tr>
+                                                    <td>${i}위</td>
+                                                    <td>` + result['mnet'][`song${i}`] + `</td>
+                                                    <td>` + result['mnet'][`artist${i}`] + `</td>
+                                                </tr>`);
+                        }
+                    }
+                });
+
+            });
+        </script>
+
+    </div>
     </body>
 </html>
